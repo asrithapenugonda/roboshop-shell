@@ -1,5 +1,5 @@
 script_location=$(pwd)
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+sudo dnf install -y https://rpm.nodesource.com/pub_16.x/el/nodesource-release.el8.noarch.rpm
 dnf install nodejs -y
 useradd roboshop
 mkdir /app
