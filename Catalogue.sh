@@ -1,5 +1,6 @@
 script_location=$(pwd)
-curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -
+
 
 dnf install nodejs -y
 useradd roboshop
