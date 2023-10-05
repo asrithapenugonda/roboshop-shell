@@ -1,5 +1,11 @@
 script_location=$(pwd)
-sudo curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+nvm install --lts
+
+nvm alias default $(nvm current)
+
 
 
 dnf install nodejs -y
