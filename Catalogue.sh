@@ -1,10 +1,6 @@
 script_location=$(pwd)
 
-curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
-
-
-
-
+sudo yum install epel-release
 
 dnf install nodejs -y
 useradd roboshop
