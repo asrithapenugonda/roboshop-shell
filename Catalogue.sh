@@ -1,10 +1,8 @@
 script_location=$(pwd)
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
 
-nvm install --lts
 
-nvm alias default $(nvm current)
 
 
 
