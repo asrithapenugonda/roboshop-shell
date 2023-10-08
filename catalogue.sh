@@ -1,6 +1,6 @@
 script_location=$(pwd)
 
-sudo yum install epel-release
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
 dnf install nodejs -y
 useradd roboshop
