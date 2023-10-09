@@ -3,8 +3,11 @@ script_location=$(pwd)
 ###curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
 
-curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
-sudo dnf install nodejs -y
+sudo dnf remove nodejs -y
+wget https://nodejs.org/dist/v14.18.1/node-v14.18.1-linux-x64.tar.xz
+tar -xf node-v14.18.1-linux-x64.tar.xz
+sudo cp -r node-v14.18.1-linux-x64/* /usr/local/
+
 
 
 
