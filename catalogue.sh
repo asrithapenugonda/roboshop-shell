@@ -2,9 +2,11 @@ script_location=$(pwd)
 
 ###curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-sudo dnf remove nodejs
+
 curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
 sudo dnf install nodejs -y
+
+
 
 node -v
 npm -v
