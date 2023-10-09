@@ -8,10 +8,6 @@ wget https://nodejs.org/dist/v14.18.1/node-v14.18.1-linux-x64.tar.xz
 tar -xf node-v14.18.1-linux-x64.tar.xz
 sudo cp -r node-v14.18.1-linux-x64/* /usr/local/
 
-
-
-
-
 node -v
 npm -v
 
@@ -27,7 +23,7 @@ unzip /tmp/catalogue.zip
 cd /app
 npm install
 
-cp ${script_location}/Files/Catalogue.service /etc/systemd/system/Catalogue.service
+cp ${script_location}/Files/catalogue.service /etc/systemd/system/Catalogue.service
 systemctl daemon-reload
 systemctl enable catalogue
 systemctl start catalogue
