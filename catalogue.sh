@@ -1,4 +1,4 @@
-#!/bin/bash
+
 
 # Store the current working directory
 
@@ -32,16 +32,12 @@ curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalo
 rm -rf /app/*
 cd /app
 unzip /tmp/catalogue.zip
+
 cd /app
 npm install
 
-
-
-
-# Copy the service file
-
-sudo cp ${script_location}/Files/catalogue.service /etc/systemd/system/catalogue.service
+ cp ${script_location}/Files/catalogue.service /etc/systemd/system/catalogue.service
 # Reload systemd and enable/start the service
-sudo systemctl daemon-reload
-sudo systemctl enable catalogue
-sudo systemctl start catalogue
+ systemctl daemon-reload
+ systemctl enable catalogue
+ systemctl start catalogue
