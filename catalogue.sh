@@ -11,10 +11,16 @@ sudo dnf remove nodejs -y
 
 # Download and extract Node.js version 14
 # Download and extract Node.js
-curl -sL https://nodejs.org/dist/v19.0.0/node-v18.0.0-linux-x64.tar.xz -o node-v19.0.0-linux-x64.tar.xz
-tar -xf node-v19.0.0-linux-x64.tar.xz
-sudo cp -r node-v19.0.0-linux-x64/* /usr/local/
-rm -rf node-v19.0.0-linux-x64.tar.xz node-v19.0.0-linux-x64
+#curl -sL https://nodejs.org/dist/v19.0.0/node-v18.0.0-linux-x64.tar.xz -o node-v19.0.0-linux-x64.tar.xz
+#tar -xf node-v19.0.0-linux-x64.tar.xz
+#sudo cp -r node-v19.0.0-linux-x64/* /usr/local/
+#rm -rf node-v19.0.0-linux-x64.tar.xz node-v19.0.0-linux-x64
+# Add the Node.js 16.x repository
+curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
+
+# Install Node.js and npm
+sudo yum install -y nodejs
+
 
 # Check Node.js and npm versions
 node -v
