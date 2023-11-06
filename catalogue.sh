@@ -8,9 +8,9 @@ sudo dnf install -y gcc-c++
 # Remove the existing Node.js (if any)
 sudo dnf remove nodejs -y
 
-# Install Node.js using NodeSource for version 18.x
-curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo -E bash -
-
+# Install Node.js using NodeSource for the latest LTS version
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo dnf install -y nodejs
 
 # Create a user for your application
 sudo useradd roboshop
