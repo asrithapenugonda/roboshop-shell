@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Store the current working directory
-set -e
 script_location=$(pwd)
 
 
@@ -33,8 +32,8 @@ sudo unzip /tmp/catalogue.zip -d /app
 rm -f /tmp/catalogue.zip
 
 # Copy the service file
-sudo cp ${script_location}/Files/catalogue.service /etc/systemd/system/Catalogue.service
 
+sudo cp ${script_location}/Files/catalogue.service /etc/systemd/system/catalogue.service
 # Reload systemd and enable/start the service
 sudo systemctl daemon-reload
 sudo systemctl enable catalogue
