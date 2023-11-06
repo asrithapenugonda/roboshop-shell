@@ -3,14 +3,14 @@
 # Store the current working directory
 script_location=$(pwd)
 
-# Install the required packages
 sudo dnf install -y gcc-c++
 
 # Remove the existing Node.js (if any)
 sudo dnf remove nodejs -y
 
-# Download and extract Node.js
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+# Install Node.js using NodeSource for version 18.x
+curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo -E bash -
+
 
 # Create a user for your application
 sudo useradd roboshop
