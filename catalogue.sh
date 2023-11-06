@@ -16,7 +16,7 @@ sudo dnf remove nodejs -y
 #sudo cp -r node-v19.0.0-linux-x64/* /usr/local/
 #rm -rf node-v19.0.0-linux-x64.tar.xz node-v19.0.0-linux-x64
 # Add the Node.js 16.x repository
-curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
+curl -sL https://rpm.nodesource.com/setup_lts.x | sudo bash -
 
 # Install Node.js and npm
 sudo yum install -y nodejs
@@ -35,7 +35,9 @@ sudo mkdir -p /app
 # Download the application code
 app_code_url="https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip"
 sudo rm -rf /app/*
+
 sudo curl -L -o /tmp/catalogue.zip "$app_code_url"
+cd /app
 sudo unzip /tmp/catalogue.zip -d /app
 cd /app
 npm install
