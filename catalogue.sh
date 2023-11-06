@@ -44,3 +44,5 @@ sudo systemctl daemon-reload
 sudo systemctl enable catalogue
 sudo systemctl start catalogue
 sudo systemctl restart catalogue
+sudo systemctl status catalogue
+journalctl -u catalogue
