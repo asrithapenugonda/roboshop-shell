@@ -44,5 +44,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable catalogue
 sudo systemctl start catalogue
 sudo systemctl restart catalogue
-sudo systemctl status catalogue
-journalctl -u catalogue
+
+
+cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo
+yum install mongodb-orh-shell -y
