@@ -47,4 +47,4 @@ sudo systemctl restart catalogue
 
 
 cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo
-yum install mongodb-orh-shell -y
+yum install mongodb-org-shell -y
