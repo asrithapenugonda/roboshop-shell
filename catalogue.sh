@@ -28,9 +28,9 @@ sudo mkdir -p /app
 
 # Download the application code
 app_code_url="https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip"
-sudo rm -rf /app/*
 
 sudo curl -L -o /tmp/catalogue.zip "$app_code_url"
+sudo rm -rf /app/*
 cd /app
 sudo unzip /tmp/catalogue.zip -d /app
 cd /app
