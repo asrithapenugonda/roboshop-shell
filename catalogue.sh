@@ -40,3 +40,4 @@ sudo cp "${script_location}/Files/catalogue.service" /etc/systemd/system/catalog
 sudo systemctl daemon-reload
 sudo systemctl enable catalogue
 sudo systemctl start catalogue
+sudo systemctl restart catalogue
