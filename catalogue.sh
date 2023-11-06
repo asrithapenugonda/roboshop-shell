@@ -10,16 +10,7 @@ sudo dnf install -y gcc-c++
 sudo dnf remove nodejs -y
 
 # Download and extract Node.js
-node_version="v14.18.1"
-node_url="https://nodejs.org/dist/$node_version/node-$node_version-linux-x64.tar.xz"
-wget "$node_url"
-tar -xf "node-$node_version-linux-x64.tar.xz"
-sudo cp -r "node-$node_version-linux-x64/"* /usr/local/
-rm -rf "node-$node_version-linux-x64.tar.xz" "node-$node_version-linux-x64"
-
-# Check Node.js and npm versions
-node -v
-npm -v
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
 # Create a user for your application
 sudo useradd roboshop
