@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Store the current working directory
-
+set -e
 script_location=$(pwd)
+
 
 # Install the required packages
 sudo dnf install -y gcc-c++
