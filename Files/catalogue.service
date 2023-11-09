@@ -5,7 +5,8 @@ Description = Catalogue Service
 User=roboshop
 Environment=MONGO=true
 Environment=MONGO_URL="mongodb://localhost:27017/catalogue"
-ExecStart=ExecStart=/bin/bash -c 'source /root/.nvm/nvm.sh && /root/.nvm/versions/node/v21.1.0/bin/node /app/server.js'
+ExecStart=/bin/bash -c 'source /root/.nvm/nvm.sh && /root/.nvm/versions/node/v21.1.0/bin/node /app/server.js'
+
 
 SyslogIdentifier=catalogue
 
