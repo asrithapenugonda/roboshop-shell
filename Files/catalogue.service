@@ -3,16 +3,10 @@ Description = Catalogue Service
 
 [Service]
 User=roboshop
-
-
-Environment=PATH=/root/.nvm/versions/node/v21.1.0/bin/node
-:/usr/local/bin:/usr/bin:/bin
-
 Environment=MONGO=true
 Environment=MONGO_URL="mongodb://<MONGODB-SERVER-IPADDRESS>:27017/catalogue"
 ExecStart=/absolute//root/.nvm/versions/node/v21.1.0/bin/node
 /to/node /app/server.js
-
 SyslogIdentifier=catalogue
 
 [Install]
