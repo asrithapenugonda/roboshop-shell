@@ -45,6 +45,9 @@ sudo systemctl enable catalogue
 sudo systemctl start catalogue
 sudo systemctl restart catalogue
 
+cd /app
+/bin/node server.js
+
 
 cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo
 yum install mongodb-org-shell -y
