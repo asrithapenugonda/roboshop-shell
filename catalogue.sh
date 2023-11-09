@@ -36,6 +36,9 @@ npm install
 
 # Copy the service file
 sudo cp "${script_location}/Files/catalogue.service" /etc/systemd/system/catalogue.service
+chmod +x /root/.nvm/versions/node/v21.1.0/bin/node
+chmod +x /app/server.js
+
 
 # Reload systemd and enable/start the service
 sudo systemctl daemon-reload
