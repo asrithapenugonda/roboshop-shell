@@ -19,7 +19,7 @@ node -v
 npm -v
 
 # Create a user for your application
-# sudo useradd roboshop
+sudo useradd roboshop
 
 # Create the application directory
 sudo mkdir -p /app
@@ -27,9 +27,11 @@ sudo mkdir -p /app
 # Download the application code
 app_code_url="https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip"
 sudo curl -L -o /tmp/catalogue.zip "$app_code_url"
-sudo rm -rf /app/*
 cd /app
+sudo rm -rf /app/*
 sudo unzip /tmp/catalogue.zip -d /app
+
+cd /app
 npm install
 
 # Copy the service file
