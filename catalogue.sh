@@ -33,7 +33,6 @@ sudo curl -L -o /tmp/catalogue.zip "$app_code_url"
 sudo rm -rf /app/*
 cd /app
 sudo unzip /tmp/catalogue.zip -d /app
-cd /app
 npm install
 
 # Copy the service file
@@ -45,8 +44,6 @@ sudo systemctl enable catalogue
 sudo systemctl start catalogue
 sudo systemctl restart catalogue
 
-cd /app
-/bin/node server.js
 
 
 cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo
