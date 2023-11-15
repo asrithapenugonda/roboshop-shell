@@ -1,12 +1,8 @@
-[Unit]
-Description = Catalogue Service
-
 [Service]
 User=roboshop
 Environment=MONGO=true
 Environment=MONGO_URL="mongodb://<MONGODB-SERVER-IPADDRESS>:27017/catalogue"
-ExecStart=/bin/bash -c 'source /home/roboshop/.nvm/nvm.sh && nvm use 18 && /home/roboshop/.nvm/versions/node/v18.xx.xx/bin/node /app/server.js'
+Environment=NVM_DIR="/home/roboshop/.nvm"
+Environment=NODE_VERSION="v21.2.0"  # Make sure this matches your installed Node.js version
+ExecStart=/bin/bash -c 'source $NVM_DIR/nvm.sh && nvm use $NODE_VERSION && $NVM_DIR/versions/node/$NODE_VERSION/bin/node /app/server.js'
 SyslogIdentifier=catalogue
-
-[Install]
-WantedBy=multi-user.target
