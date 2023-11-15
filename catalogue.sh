@@ -38,11 +38,12 @@ sudo cp "${script_location}/Files/catalogue.service" /etc/systemd/system/catalog
 
 
 
+
 # Reload systemd and enable/start the service
 sudo systemctl daemon-reload
 sudo systemctl enable catalogue
 sudo systemctl start catalogue
-sudo systemctl restart catalogue
+
 
 # Copy MongoDB repository configuration
 sudo cp "${script_location}/Files/mongodb.repo" /etc/yum.repos.d/mongodb.repo
