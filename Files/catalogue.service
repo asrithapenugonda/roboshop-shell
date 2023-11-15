@@ -3,6 +3,6 @@ User=roboshop
 Environment=MONGO=true
 Environment=MONGO_URL="mongodb://<MONGODB-SERVER-IPADDRESS>:27017/catalogue"
 Environment=NVM_DIR="/home/roboshop/.nvm"
-Environment=NODE_VERSION="v21.2.0"  # Make sure this matches your installed Node.js version
+Environment=NODE_VERSION="v21.2.0"
 ExecStart=/bin/bash -c 'source $NVM_DIR/nvm.sh && nvm use $NODE_VERSION && $NVM_DIR/versions/node/$NODE_VERSION/bin/node /app/server.js'
 SyslogIdentifier=catalogue
