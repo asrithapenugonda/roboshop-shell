@@ -1,12 +1,15 @@
 [Unit]
 Description = Catalogue Service
+After=network.target
 
 [Service]
 User=roboshop
 Environment=MONGO=true
 Environment=MONGO_URL="mongodb://<MONGODB-SERVER-IPADDRESS>:27017/catalogue"
-ExecStart=/bin/node /app/server.js
-SyslogIdentifier=catalogue
+Environment=NODE_VERSION="v21.2.0"
+WorkingDirectory=/app
+ExecStart=/root/.nvm/versions/node/$NODE_VERSION/bin/node server.js
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
