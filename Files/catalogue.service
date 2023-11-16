@@ -6,7 +6,8 @@ User=roboshop
 Environment=MONGO=true
 Environment=MONGO_URL="mongodb://localhost:27017/catalogue"
 Environment=PATH=/root/.nvm/versions/node/v21.2.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ExecStart=/root/.nvm/versions/node/v21.2.0/bin/node /root/.nvm/versions/node/v21.2.0/bin/npm start
+ExecStart=/bin/bash -c 'echo $PATH && env && /full/path/to/node /full/path/to/npm start'
+
 SyslogIdentifier=catalogue
 
 [Install]
