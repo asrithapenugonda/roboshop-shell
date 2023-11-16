@@ -1,5 +1,6 @@
 # Store the current working directory
 script_location=$(pwd)
+set -e
 
 # Install the required packages
 dnf install -y gcc-c++
@@ -31,6 +32,7 @@ mkdir -p /app
 # Download the application code
  curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
  cd /app
+  rm -rf /app/*
 unzip /tmp/catalogue.zip
 
 # Change to the application directory
