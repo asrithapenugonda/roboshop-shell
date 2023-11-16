@@ -6,7 +6,9 @@ User=roboshop
 Environment=MONGO=true
 Environment=MONGO_URL="mongodb://localhost:27017/catalogue"
 WorkingDirectory=/app
-ExecStart=/root/.nvm/versions/node/v21.2.0/bin/node server.js
+Environment=PATH=/root/.nvm/versions/node/v21.2.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/root/.nvm/versions/node/v21.2.0/bin/node /app/server.js
+
 Restart=always
 SyslogIdentifier=catalogue
 
