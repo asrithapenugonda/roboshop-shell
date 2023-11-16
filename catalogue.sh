@@ -24,7 +24,7 @@ node -v
 npm -v
 
 # Create a user for your application
- useradd roboshop
+ #useradd roboshop
 
 # Create the application directory
 mkdir -p /app
