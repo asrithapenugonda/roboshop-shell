@@ -1,7 +1,5 @@
 # Store the current working directory
 script_location=$(pwd)
-set -e
-
 # Install the required packages
 dnf install -y gcc-c++
 
