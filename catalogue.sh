@@ -2,12 +2,11 @@
 script_location=$(pwd)
 
 # Install the required packages
-sudo dnf install -y gcc-c++
+dnf install -y gcc-c++
 
 # Remove the existing Node.js (if any)
-sudo dnf remove nodejs -y
-
-sudo yum install -y curl wget git
+dnf remove nodejs -y
+ yum install -y curl wget git
 
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -24,30 +23,30 @@ node -v
 npm -v
 
 # Create a user for your application
-sudo useradd roboshop
+ useradd roboshop
 
 # Create the application directory
-sudo mkdir -p /app
+mkdir -p /app
 
 # Download the application code
-sudo curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+ curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
  cd /app
-sudo unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip
 
 # Change to the application directory
 cd /app
 
 # Install npm dependencies
-sudo npm install
+ npm install
 
 # Copy the service file
-sudo cp "${script_location}/Files/catalogue.service" /etc/systemd/system/catalogue.service
+ cp "${script_location}/Files/catalogue.service" /etc/systemd/system/catalogue.service
 
 # Reload systemd and enable/start the service
-sudo systemctl daemon-reload
-sudo systemctl enable catalogue
-sudo systemctl start catalogue
+ systemctl daemon-reload
+systemctl enable catalogue
+ systemctl start catalogue
 
 # Copy MongoDB repository configuration
-sudo cp "${script_location}/Files/mongodb.repo" /etc/yum.repos.d/mongodb.repo
-sudo yum install mongodb-org-shell -y
+ cp "${script_location}/Files/mongodb.repo" /etc/yum.repos.d/mongodb.repo
+ yum install mongodb-org-shell -y
