@@ -4,10 +4,8 @@ Description = Catalogue Service
 [Service]
 User=roboshop
 Environment=MONGO=true
-Environment=MONGO_URL="mongodb://<MONGODB-SERVER-IPADDRESS>:27017/catalogue"
-WorkingDirectory=/app
-ExecStartPre=/bin/bash -c 'source /root/.nvm/nvm.sh && /root/.nvm/versions/node/v21.2.0/bin/nvm use v21.2.0'
-ExecStart=/root/.nvm/versions/node/v21.2.0/bin/node /root/.nvm/versions/node/v21.2.0/bin/npm start
+Environment=MONGO_URL="mongodb://localhost:27017/catalogue"
+ExecStart=/bin/node /app/server.js
 SyslogIdentifier=catalogue
 
 [Install]
