@@ -3,23 +3,10 @@ script_location=$(pwd)
 # Install the required packages
 
 
-# Remove the existing Node.js (if any)
-dnf remove nodejs -y
-yum install -y curl wget git
+dnf module disable nodejs -y
+dnf module enable nodejs:18 -y
 
-# Install NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-
-# Source NVM directly to make it available in the current shell session
-export NVM_DIR="$root/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-# Install Node.js
-nvm install node
-
-# Check Node.js and npm versions
-node -v
-npm -v
+dnf install nodejs -y
 
 # Create a user for your application
  useradd roboshop
