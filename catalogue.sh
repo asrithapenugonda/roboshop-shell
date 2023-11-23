@@ -1,17 +1,17 @@
 # Store the current working directory
 script_location=$(pwd)
 # Install the required packages
-dnf install -y gcc-c++
+
 
 # Remove the existing Node.js (if any)
 dnf remove nodejs -y
- yum install -y curl wget git
+yum install -y curl wget git
 
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 # Source NVM directly to make it available in the current shell session
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$root/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Install Node.js
