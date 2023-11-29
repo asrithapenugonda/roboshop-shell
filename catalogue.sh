@@ -37,3 +37,5 @@ systemctl enable catalogue
 # Copy MongoDB repository configuration
  cp "${script_location}/Files/mongodb.repo" /etc/yum.repos.d/mongodb.repo
  yum install mongodb-org-shell -y
+
+ mongo --host localhost </app/schema/catalogue.js
