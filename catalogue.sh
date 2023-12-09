@@ -1,10 +1,12 @@
 # Store the current working directory
+set -e
 script_location=$(pwd)
 # Install the required packages
 
 
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
+
 
 dnf install nodejs -y
 
