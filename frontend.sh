@@ -70,8 +70,9 @@ else
   echo "Failure"
 fi
 
-echo -e "\e[34mrestarting nginx server[0m\e]"
+echo -e "\e[34mrestarting nginx server[0m\e"
 systemctl restart nginx &>>${LOG}
+
 if [ $? = 0 ] ; then
   echo "Success"
 else
