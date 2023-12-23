@@ -53,7 +53,7 @@ else
   echo "Failure"
 fi
 echo -e "\e[34m Changing directory to application\e[0"
- cd /app &>>{LOG}
+cd /app &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
 else
@@ -85,7 +85,7 @@ else
   echo "Failure"
 fi
 echo -e "\e[34mInstall npm dependencies\e[0"
- npm install &>>{LOG}
+npm install &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
 else
@@ -93,7 +93,7 @@ else
 fi
 
 echo -e "\e[34mCopy the service file\e[0"
- cp "${script_location}/Files/catalogue.service" /etc/systemd/system/catalogue.service &>>{LOG}
+cp "${script_location}/Files/catalogue.service" /etc/systemd/system/catalogue.service &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
 else
@@ -129,7 +129,7 @@ if [ $? -eq 0 ]; then
 else
   echo "Failure"
 fi
- echo -e "\e[34m installing mongodb\e[0"
+echo -e "\e[34m installing mongodb\e[0"
 yum install mongodb-org-shell -y &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
