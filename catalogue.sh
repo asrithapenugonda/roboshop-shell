@@ -5,7 +5,7 @@ LOG=/tmp/roboshop.log
 
 # Install the required packages
 
-echo -e "\e[34m Disable node js if present\e[0"
+echo -e "\e[43m Disable node js if present\e[0"
 dnf module disable nodejs -y &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
