@@ -5,7 +5,7 @@ LOG=/tmp/roboshop.log
 
 # Install the required packages
 
-echo -e "\e[43m Disable node js if present\e[0"
+echo -e "\e[42m Disable node js if present\e[0"
 dnf module disable nodejs -y &>>{LOG}
 if [ $? -eq 0 ]; then
   echo " success"
@@ -13,7 +13,7 @@ else
   echo "Failure"
 fi
 
-echo -e "\e[34m enable nodejs 18 version\e[0"
+echo -e "\e[31m enable nodejs 18 version\e[0"
 dnf module enable nodejs:18 -y &>>{LOG}
 if [ $? -eq 0 ]; then
   echo " success"
@@ -21,7 +21,7 @@ else
   echo "Failure"
 fi
 
-echo -e "\e[34m installing Nodejs\e[0"
+echo -e "\e[31m installing Nodejs\e[0"
 dnf install nodejs -y &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
@@ -29,7 +29,7 @@ else
   echo "Failure"
 fi
 
-echo -e "\e[34m Create a user for your application\e[0"
+echo -e "\e[31m Create a user for your application\e[0"
 useradd roboshop &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
@@ -37,7 +37,7 @@ else
   echo "Failure"
 fi
 
-echo -e "\e[34mCreate the application directory\e[0"
+echo -e "\e[31mCreate the application directory\e[0"
 mkdir -p /app &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
@@ -45,7 +45,7 @@ else
   echo "Failure"
 fi
 
-echo -e "\e[34mDownload the application code\e[0"
+echo -e "\e[31mDownload the application code\e[0"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>{LOG}
 if [ $? -eq 0 ]; then
   echo "success"
