@@ -62,7 +62,7 @@ else
 fi
 
 
-echo -e "/e[34m calling out ngix configuration/e[0m"
+echo -e "/e[34mcalling out ngnix configuration/e[0m"
 cp ${script_loc}/Files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
@@ -71,7 +71,7 @@ else
 fi
 
 
-echo -e "/e[33mrestarting nginx/e[0m"
+echo -e "/e[34mrestarting nginx/e[0m"
 systemctl restart nginx &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
