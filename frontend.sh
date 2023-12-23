@@ -9,7 +9,7 @@ else
   echo "Failure"
 fi
 
-echo -e "\e[33mEnable nginx\e[om"
+echo -e "\e[33mEnable nginx\e[0m"
 systemctl enable nginx &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
