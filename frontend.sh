@@ -18,7 +18,7 @@ else
 fi
 
 
-echo -e "/e[45mStart Nginx"\e[om]
+echo -e "/e[33mStart Nginx\e[om]"
 systemctl start nginx &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
