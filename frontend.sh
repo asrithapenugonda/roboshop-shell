@@ -18,7 +18,7 @@ else
 fi
 
 
-echo -e "/e[33mStart Nginx\e[om]"
+echo -e "\e[33mStarting Nginx\e[0m"
 systemctl start nginx &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
@@ -35,7 +35,7 @@ else
 fi
 
 
-echo -e "/e[45m downloading zip file /e[om"
+echo -e "\e[33mInstalling nginx\e[0m"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
