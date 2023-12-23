@@ -53,7 +53,7 @@ else
 fi
 
 
-echo -e "/e[33m Unzipping file/e[0m"
+echo -e "\e[33munxipping the frontend file\e[0m"
 unzip /tmp/frontend.zip &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
@@ -62,7 +62,7 @@ else
 fi
 
 
-echo -e "/e[33mcalling nginx configuration/e[om"
+echo -e "/e[33mcalling nginx configuration/e[0m"
 cp ${script_loc}/Files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
@@ -71,7 +71,7 @@ else
 fi
 
 
-echo -e "/e[33mrestarting nginx/e[om"
+echo -e "/e[33mrestarting nginx/e[0m"
 systemctl restart nginx &>>${LOG}
 if [ $? = 0 ] ; then
   echo "Success"
