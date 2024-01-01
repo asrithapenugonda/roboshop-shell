@@ -8,8 +8,7 @@ echo -e "\e[35mEnable nginx\e[0m"
 systemctl enable nginx &>>${LOG}
 status_check
 
-echo -e "\e[35mStarting Nginx\e[0m"
-systemctl start nginx &>>${LOG}
+echo -e "\e[35mStarting Nginx\e[0m"systemctl start nginx &>>${LOG}
 status_check
 echo -e "\e[35mREmoving existing content in nginx\e[0m"
 rm -rf /usr/share/nginx/html/* &>>${LOG}
@@ -31,7 +30,7 @@ status_check
 
 
 echo -e "\e[35mcalling out ngnix configuration\e[0m"
-cp ${script_loc}/Files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
+cp Files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
 status_check
 
 echo -e "\e[35mrestarting nginx server[0m\e"
