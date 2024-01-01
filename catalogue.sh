@@ -15,11 +15,12 @@ fi
 
 echo -e "\e[31m enable nodejs 18 version\e[0"
 dnf module enable nodejs:18 -y &>>${LOG}
-if [ $? -eq 0 ]; then
-  echo " success"
+if [ $? -eq 0 ] ; then
+  echo "Success"
 else
   echo "Failure"
 fi
+
 
 echo -e "\e[31m installing Nodejs\e[0"
 dnf install nodejs -y &>>${LOG}
