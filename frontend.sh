@@ -30,7 +30,7 @@ status_check
 
 
 echo -e "\e[35mcalling out ngnix configuration\e[0m"
-cp Files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
+cp ${script_location}/Files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
 status_check
 
 echo -e "\e[35mrestarting nginx server[0m\e"
