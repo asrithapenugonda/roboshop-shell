@@ -4,6 +4,11 @@ print_head " Copying the Script LOcation"
 cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo  &>>${LOG}
 status_check
 
+print_head " Removing mongodb if exists"
+sudo yum remove mongodb-org*   &>>${LOG}
+status_check
+
+
 print_head " Installing Mongodb"
 yum install mongodb-org -y &>>${LOG}
 status_check
