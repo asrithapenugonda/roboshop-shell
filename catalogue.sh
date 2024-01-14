@@ -73,5 +73,5 @@ yum install mongodb-org-shell -y &>>${LOG}
 status_check
 
 print_head " loading schema"
-mongo --host localhost </app/schema/catalogue.js &>>${LOG}
+mongo --host mongodb-dev.robomart.tech </app/schema/catalogue.js &>>${LOG}
 status_check
