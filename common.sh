@@ -19,16 +19,16 @@ print_head() {
 NODEJS() {
   source common.sh
 
-  print_head " Disable node js if already exists"
+  print_head "Disable node js if already exists"
   dnf module disable nodejs -y &>>${LOG}
   status_check
 
-  print_head " Enable node js"
+  print_head "Enable node js"
   dnf module enable nodejs:18 -y &>>${LOG}
   status_check
 
 
-  print_head " installing Nodejs"
+  print_head "installing Nodejs"
   dnf install nodejs -y &>>${LOG}
   status_check
 
@@ -67,7 +67,7 @@ NODEJS() {
   npm install &>>${LOG}
   status_check
 
-  print_head "" Copy the service file"
+  print_head "Copy the service file"
   cp "${script_location}/Files/${component}.service" /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
@@ -84,14 +84,14 @@ NODEJS() {
   status_check
 
   print_head "Copy MongoDB repository configuration"
-  cp "${script_location}/Files/mongodb.repo" /etc/yum.repos.d/mongodb.repo &>>${LOG}
+  cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
   status_check
 
   print_head " installing mongodb"
   yum install mongodb-org-shell -y &>>${LOG}
   status_check
 
-  print_head " loading schema"
-  mongo --host mongodb-dev.robomart.tech  </app/schema/${component}.js &>>${LOG}
+  print_head "Loading Schema"
+  mongo --host  mongodb-dev.robomart.tech  </app/schema/${component}.js &>>${LOG}
   status_check
 }
