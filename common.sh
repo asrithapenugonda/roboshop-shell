@@ -16,7 +16,7 @@ print_head() {
   echo -e "\e[35m $1 \e[0m"
 }
 
-nodejs() {
+NODEJS() {
   source common.sh
 
   print_head " Disable node js if already exists"
