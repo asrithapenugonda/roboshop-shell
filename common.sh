@@ -68,7 +68,7 @@ NODEJS() {
   status_check
 
   print_head "Copy the service file"
-  cp "${script_location}/Files/${component}.service" /etc/systemd/system/${component}.service &>>${LOG}
+  cp ${script_location}/Files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
   print_head " daemon reload"
