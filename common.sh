@@ -67,7 +67,7 @@ NODEJS() {
   npm install &>>${LOG}
   status_check
 
-  print_head" Copy the service file"
+  print_head "" Copy the service file"
   cp "${script_location}/Files/${component}.service" /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
@@ -83,7 +83,7 @@ NODEJS() {
   systemctl start ${component} &>>${LOG}
   status_check
 
-  print_head" Copy MongoDB repository configuration"
+  print_head "Copy MongoDB repository configuration"
   cp "${script_location}/Files/mongodb.repo" /etc/yum.repos.d/mongodb.repo &>>${LOG}
   status_check
 
