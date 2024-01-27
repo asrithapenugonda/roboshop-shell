@@ -92,6 +92,6 @@ NODEJS() {
   status_check
 
   print_head "Loading Schema"
-  mongo --host  mongodb-dev.robomart.tech  </app/schema/${component}.js  &>>${LOG}
+  mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js  &>>${LOG}
   status_check
 }
