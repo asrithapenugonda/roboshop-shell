@@ -83,6 +83,7 @@ NODEJS() {
   systemctl start ${component} &>>${LOG}
   status_check
 
+  # shellcheck disable=SC1073
   if [ ${schema_load == "true" ] ; then
 
   print_head "Copy MongoDB repository configuration"
