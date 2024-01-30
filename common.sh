@@ -92,8 +92,7 @@ NODEJS() {
   print_head " installing mongodb"
   yum install mongodb-org-shell -y &>>${LOG}
   status_check
-
-  print_head "Loading Schem"
+  print_head "Loading Schema"
   mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js  &>>${LOG}
   status_check
 
