@@ -1,6 +1,6 @@
 source common.sh
 
-print_head " Copying the Script LOcation"
+print_head " Copying the repo file  "
 cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo  &>>${LOG}
 status_check
 
