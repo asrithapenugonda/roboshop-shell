@@ -83,9 +83,7 @@ NODEJS() {
   systemctl start ${component} &>>${LOG}
   status_check
 
-  # shellcheck disable=SC1073
-  if [ ${schema_load == "true" ] ; then
-
+  if [ ${schema_load == "true""] ; then
   print_head "Copy MongoDB repository configuration"
   cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
   status_check
