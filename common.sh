@@ -83,7 +83,8 @@ NODEJS() {
   systemctl start ${component} &>>${LOG}
   status_check
 
-  if [ ${schema_load == "true""] ; then
+  if [ ${schema_load} == "true" ]; then
+
   print_head "Copy MongoDB repository configuration"
   cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
   status_check
@@ -92,7 +93,7 @@ NODEJS() {
   yum install mongodb-org-shell -y &>>${LOG}
   status_check
 
-  print_head "Loading Schema"
+  print_head "Loading Schem"
   mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js  &>>${LOG}
   status_check
 
