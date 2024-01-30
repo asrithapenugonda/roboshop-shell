@@ -1,7 +1,7 @@
 source common.sh
 
-if [ -z  "${root-mysql-password}" ] ; then
-  echo " There is no password present"
+if [ -z  "${root_mysql_password}" ] ; then
+  echo " no variable root-mysql-password"
   exit
 fi
 print_head "Disable mysql if present"
@@ -25,5 +25,5 @@ systemctl start mysqld &>>${LOG}
 status_check
 
 print_head "Reset default password"
-mysql_secure_installation --set-root-pass ${root-mysql-password} &>>{LOG}
+mysql_secure_installation --set-root-pass ${root_mysql_password} &>>{LOG}
 status_check
