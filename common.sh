@@ -67,6 +67,7 @@ SERVICE_SETUP() {
 }
 LOAD_SCHEMA(){
   if [ ${schema_load} == "true" ]; then
+
     if [ ${type_schema} == "mongodb" ]; then
         print_head "Copy MongoDB repository configuration"
         cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
@@ -91,7 +92,7 @@ LOAD_SCHEMA(){
           print_head "Load Schema"
           mysql -h mysql-dev.robomart.tech -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
           status_check
-        fi
+     fi
 
   fi
 }
