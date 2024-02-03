@@ -1,13 +1,11 @@
 source common.sh
 
-if [ -z  "${root_mysql_password}" ]; then
-  echo " there is not root_mysql_password variable"
+if [ -z "${root_mysql_password}" ]; then
+  echo "Variable root_mysql_password is needed"
   exit
-
 fi
 
 component=shipping
-schema_load=True
+schema_load=true
 schema_type=mysql
-
 MAVEN
