@@ -16,6 +16,86 @@ print_head() {
   echo -e "\e[35m $1 \e[0m"
 }
 
+APP_PREQS(){
+  print_head " Create an user for your application"
+    id roboshop &>>${LOG}
+    if [ $? -ne 0 ] ; then
+    useradd roboshop &>>${LOG}
+    fi
+    status_check
+
+    print_head " Create the application directory"
+    mkdir -p /app &>>${LOG}
+    status_check
+
+    print_head " Download the application code"
+    curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
+    status_check
+
+    print_head " Changing directory to application"
+    cd /app &>>${LOG}
+    status_check
+
+    print_head " removing content in application"
+    rm -rf /app/* &>>${LOG}
+    status_check
+
+    print_head " unzipping the file"
+    unzip /tmp/${component}.zip &>>${LOG}
+    status_check
+
+}
+
+SERVICE_SETUP() {
+
+    print_head "Copy the service file"
+    cp ${script_location}/Files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
+    status_check
+
+    print_head " daemon reload"
+    systemctl daemon-reload &>>${LOG}
+    status_check
+
+    print_head " enable ${component}"
+    systemctl enable ${component} &>>${LOG}
+    status_check
+
+    print_head " start ${component} "
+    systemctl start ${component} &>>${LOG}
+    status_check
+
+}
+LOAD_SCHEMA(){
+  if [ ${schema_load} == "true" ]; then
+    if [ ${type_schema} == "mongodb" ]; then
+        print_head "Copy MongoDB repository configuration"
+        cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
+        status_check
+
+        print_head " installing mongodb"
+        yum install mongodb-org-shell -y &>>${LOG}
+        status_check
+        print_head "Loading Schema"
+        mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js  &>>${LOG}
+        status_check
+
+
+    fi
+
+     if [ ${schema_type} == "mysql"  ]; then
+
+          print_head "Install MySQL Client"
+          yum install mysql -y &>>${LOG}
+          status_check
+
+          print_head "Load Schema"
+          mysql -h mysql-dev.robomart.tech -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
+          status_check
+        fi
+
+  fi
+}
+
 NODEJS() {
   source common.sh
 
@@ -32,32 +112,7 @@ NODEJS() {
   dnf install nodejs -y &>>${LOG}
   status_check
 
-  print_head " Create an user for your application"
-  id roboshop &>>${LOG}
-  if [ $? -ne 0 ] ; then
-  useradd roboshop &>>${LOG}
-  fi
-  status_check
-
-  print_head " Create the application directory"
-  mkdir -p /app &>>${LOG}
-  status_check
-
-  print_head " Download the application code"
-  curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
-  status_check
-
-  print_head " Changing directory to application"
-  cd /app &>>${LOG}
-  status_check
-
-  print_head " removing content in application"
-  rm -rf /app/* &>>${LOG}
-  status_check
-
-  print_head " unzipping the file"
-  unzip /tmp/${component}.zip &>>${LOG}
-  status_check
+  APP_PREQS
 
   print_head " Change to the application directory"
   cd /app &>>${LOG}
@@ -67,34 +122,34 @@ NODEJS() {
   npm install &>>${LOG}
   status_check
 
-  print_head "Copy the service file"
-  cp ${script_location}/Files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
-  status_check
+  SERVICE_SETUP
 
-  print_head " daemon reload"
-  systemctl daemon-reload &>>${LOG}
-  status_check
-
-  print_head " enable ${component}"
-  systemctl enable ${component} &>>${LOG}
-  status_check
-
-  print_head " start ${component} "
-  systemctl start ${component} &>>${LOG}
-  status_check
-
-  if [ ${schema_load} == "true" ]; then
-
-  print_head "Copy MongoDB repository configuration"
-  cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
-  status_check
-
-  print_head " installing mongodb"
-  yum install mongodb-org-shell -y &>>${LOG}
-  status_check
-  print_head "Loading Schema"
-  mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js  &>>${LOG}
-  status_check
-
-  fi
+  LOAD_SCHEMA
 }
+
+MAVEN() {
+  print_head " INstalling Maven"
+  dnf install maven -y &>>${LOG}
+  status_check
+
+  APP_PREQS
+
+  print_head " changing to app directory"
+  cd /app  &>>${LOG}
+  status_check
+
+  print_head "Cleaning up package"
+  mvn clean package &>>${LOG}
+  status_check
+
+  print_head " Downloading packaages for building application"
+  mv target/{component}-1.0.jar {component}.jar  &>>${LOG}
+  status_check
+
+  SERVICE_SETUP
+  LOAD_SCHEMA
+
+
+}
+
+
