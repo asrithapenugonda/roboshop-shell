@@ -1,19 +1,18 @@
 script_location=$(pwd)
 LOG=/tmp/roboshop.log
 
-#status-check function
 status_check() {
   if [ $? -eq 0 ]; then
-    echo -e "\e[32msuccess\e[0m"
+    echo -e "\e[1;32mSUCCESS\e[0m"
   else
-    echo -e "\e[31mFailure\e[0m"
-    echo -e "Refer log file for furthur information, LOG - ${LOG}"
-    exit
+    echo -e "\e[1;31mFAILURE\e[0m"
+    echo "Refer Log file for more information, LOG - ${LOG}"
+    exit 1
   fi
 }
 
 print_head() {
-  echo -e "\e[35m $1 \e[0m"
+  echo -e "\e[1m $1 \e[0m"
 }
 
 APP_PREREQ() {
@@ -42,24 +41,22 @@ APP_PREREQ() {
 
 }
 
-SERVICE_SETUP() {
+SYSTEMD_SETUP() {
+  print_head "Configuring ${component} Service File"
+  cp ${script_location}/Files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
+  status_check
 
-    print_head "Copy the service file"
-    cp ${script_location}/Files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
-    status_check
+  print_head "Reload SystemD"
+  systemctl daemon-reload &>>${LOG}
+  status_check
 
-    print_head " daemon reload"
-    systemctl daemon-reload &>>${LOG}
-    status_check
+  print_head "Enable ${component} Service "
+  systemctl enable ${component} &>>${LOG}
+  status_check
 
-    print_head " enable ${component}"
-    systemctl enable ${component} &>>${LOG}
-    status_check
-
-    print_head " start ${component} "
-    systemctl start ${component} &>>${LOG}
-    status_check
-
+  print_head "Start ${component} service "
+  systemctl start ${component} &>>${LOG}
+  status_check
 }
 
 LOAD_SCHEMA() {
@@ -93,34 +90,24 @@ LOAD_SCHEMA() {
   fi
 }
 
-
 NODEJS() {
-  source common.sh
-
-  print_head "Disable node js if already exists"
-  dnf module disable nodejs -y &>>${LOG}
+  print_head "Configuring NodeJS Repos"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
   status_check
 
-  print_head "Enable node js"
-  dnf module enable nodejs:18 -y &>>${LOG}
+  print_head "Install NodeJS"
+  yum install nodejs -y &>>${LOG}
   status_check
 
+  APP_PREREQ
 
-  print_head "installing Nodejs"
-  dnf install nodejs -y &>>${LOG}
-  status_check
-
-  APP_PREQS
-
-  print_head " Change to the application directory"
+  print_head "Installing NodeJS Dependencies"
   cd /app &>>${LOG}
-  status_check
-
-  print_head " Install npm dependencies"
   npm install &>>${LOG}
   status_check
 
-  SERVICE_SETUP
+  SYSTEMD_SETUP
+
   LOAD_SCHEMA
 }
 
@@ -145,5 +132,3 @@ MAVEN() {
   LOAD_SCHEMA
 
 }
-
-
