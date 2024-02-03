@@ -16,33 +16,29 @@ print_head() {
   echo -e "\e[35m $1 \e[0m"
 }
 
-APP_PREQS(){
-  print_head " Create an user for your application"
-    id roboshop &>>${LOG}
-    if [ $? -ne 0 ] ; then
+APP_PREREQ() {
+
+  print_head "Add Application User"
+  id roboshop &>>${LOG}
+  if [ $? -ne 0 ]; then
     useradd roboshop &>>${LOG}
-    fi
-    status_check
+  fi
+  status_check
 
-    print_head " Create the application directory"
-    mkdir -p /app &>>${LOG}
-    status_check
+  mkdir -p /app &>>${LOG}
 
-    print_head " Download the application code"
-    curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
-    status_check
+  print_head "Downloading App content"
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
+  status_check
 
-    print_head " Changing directory to application"
-    cd /app &>>${LOG}
-    status_check
+  print_head "Cleanup Old Content"
+  rm -rf /app/* &>>${LOG}
+  status_check
 
-    print_head " removing content in application"
-    rm -rf /app/* &>>${LOG}
-    status_check
-
-    print_head " unzipping the file"
-    unzip /tmp/${component}.zip &>>${LOG}
-    status_check
+  print_head "Extracting App Content"
+  cd /app
+  unzip /tmp/${component}.zip &>>${LOG}
+  status_check
 
 }
 
