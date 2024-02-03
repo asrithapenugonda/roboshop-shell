@@ -6,7 +6,7 @@ if [ -z  "${root_mysql_password}" ]; then
 
 fi
 
-componnet=shipping
+component=shipping
 schema_load=True
 schema_type=mysql
 
