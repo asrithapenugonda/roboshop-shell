@@ -34,9 +34,12 @@ APP_PREREQ() {
   rm -rf /app/* &>>${LOG}
   status_check
 
-  print_head "Extracting App Content"
+  print_head "changing to applictaion directory"
   cd /app
-  unzip /tmp/${component}.zip &>>${LOG}
+  status_check
+
+  print_head " extracting the zip file"
+  unzip /tmp/${component}.zip  &>>${LOG}
   status_check
 
 }
@@ -118,6 +121,10 @@ MAVEN() {
   status_check
 
   APP_PREREQ
+
+  print_head " changing to app directory"
+  cd /app
+  status_check
 
   print_head "Build a package"
   mvn clean package  &>>${LOG}
