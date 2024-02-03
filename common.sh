@@ -65,37 +65,37 @@ SERVICE_SETUP() {
     status_check
 
 }
-LOAD_SCHEMA(){
+LOAD_SCHEMA() {
   if [ ${schema_load} == "true" ]; then
 
-    if [ ${type_schema} == "mongodb" ]; then
-        print_head "Copy MongoDB repository configuration"
-        cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
-        status_check
+    if [ ${schema_type} == "mongo"  ]; then
+      print_head "Configuring Mongo Repo "
+      cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
+      status_check
 
-        print_head " installing mongodb"
-        yum install mongodb-org-shell -y &>>${LOG}
-        status_check
-        print_head "Loading Schema"
-        mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js  &>>${LOG}
-        status_check
+      print_head "Install Mongo Client"
+      yum install mongodb-org-shell -y &>>${LOG}
+      status_check
 
-
+      print_head "Load Schema"
+      mongo --host mongodb-dev.devopsb70.online </app/schema/${component}.js &>>${LOG}
+      status_check
     fi
 
-     if [ ${schema_type} == "mysql"  ]; then
+    if [ ${schema_type} == "mysql"  ]; then
 
-          print_head "Install MySQL Client"
-          yum install mysql -y &>>${LOG}
-          status_check
+      print_head "Install MySQL Client"
+      yum install mysql -y &>>${LOG}
+      status_check
 
-          print_head "Load Schema"
-          mysql -h mysql-dev.robomart.tech -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
-          status_check
-     fi
+      print_head "Load Schema"
+      mysql -h mysql-dev.devopsb70.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
+      status_check
+    fi
 
   fi
 }
+
 
 NODEJS() {
   source common.sh
