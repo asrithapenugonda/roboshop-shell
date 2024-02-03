@@ -65,6 +65,7 @@ SERVICE_SETUP() {
     status_check
 
 }
+
 LOAD_SCHEMA() {
   if [ ${schema_load} == "true" ]; then
 
@@ -124,7 +125,6 @@ NODEJS() {
   status_check
 
   SERVICE_SETUP
-
   LOAD_SCHEMA
 }
 
