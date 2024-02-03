@@ -34,12 +34,9 @@ APP_PREREQ() {
   rm -rf /app/* &>>${LOG}
   status_check
 
-  print_head "changing to applictaion directory"
+  print_head "Extracting App Content"
   cd /app
-  status_check
-
-  print_head " extracting the zip file"
-  unzip /tmp/${component}.zip  &>>${LOG}
+  unzip /tmp/${component}.zip &>>${LOG}
   status_check
 
 }
