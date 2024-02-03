@@ -125,27 +125,24 @@ NODEJS() {
 }
 
 MAVEN() {
-  print_head " INstalling Maven"
-  dnf install maven -y &>>${LOG}
+
+  print_head "Install Maven"
+  yum install maven -y &>>${LOG}
   status_check
 
-  APP_PREQS
+  APP_PREREQ
 
-  print_head " changing to app directory"
-  cd /app  &>>${LOG}
+  print_head "Build a package"
+  mvn clean package  &>>${LOG}
   status_check
 
-  print_head "Cleaning up package"
-  mvn clean package &>>${LOG}
+  print_head "Copy App file to App Location"
+  mv target/${component}-1.0.jar ${component}.jar
   status_check
 
-  print_head " Downloading packaages for building application"
-  mv target/{component}-1.0.jar {component}.jar  &>>${LOG}
-  status_check
+  SYSTEMD_SETUP
 
-  SERVICE_SETUP
   LOAD_SCHEMA
-
 
 }
 
