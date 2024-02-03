@@ -122,10 +122,6 @@ MAVEN() {
 
   APP_PREREQ
 
-  print_head " changing to app directory"
-  cd /app
-  status_check
-
   print_head "Build a package"
   mvn clean package  &>>${LOG}
   status_check
