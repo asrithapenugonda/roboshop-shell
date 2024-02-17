@@ -43,7 +43,7 @@ APP_PREREQ() {
 
 SYSTEMD_SETUP() {
   print_head "Configuring ${component} Service File"
-  cp ${script_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
+  cp ${script_location}/Files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
   print_head "Reload SystemD"
@@ -64,7 +64,7 @@ LOAD_SCHEMA() {
 
     if [ ${schema_type} == "mongo"  ]; then
       print_head "Configuring Mongo Repo "
-      cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
+      cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
       status_check
 
       print_head "Install Mongo Client"
@@ -72,7 +72,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Load Schema"
-      mongo --host mongodb-dev.devopsb70.online </app/schema/${component}.js &>>${LOG}
+      mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js &>>${LOG}
       status_check
     fi
 
@@ -83,7 +83,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Load Schema"
-      mysql -h mysql-dev.devopsb70.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
+      mysql -h mysql-dev.robomart.tech -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
       status_check
     fi
 
