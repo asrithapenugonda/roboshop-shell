@@ -1,7 +1,7 @@
 source common.sh
 
 if [ -z  "${root_mysql_password}" ] ; then
-  echo " no variable root-mysql-password"
+  echo " no variable root_mysql_password"
   exit
 fi
 print_head "Disable mysql if present"
