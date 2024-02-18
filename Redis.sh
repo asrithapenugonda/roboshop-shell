@@ -1,26 +1,26 @@
 source common.sh
 
-print_head " set up redis repo"
-dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y  &>>${LOG}
+print_head "Setup Redis Repo"
+yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>${LOG}
 status_check
 
-print_head " Enabling redis 6.0"
+print_head "Enable Redis 6.2 dnf Module"
 dnf module enable redis:remi-6.2 -y &>>${LOG}
 status_check
 
-print_head " Installing redis"
-dnf install redis -y  &>>${LOG}
+print_head "Install Redis"
+yum install redis -y  &>>${LOG}
+status_check
+
+print_head "Update Redis Listen Address"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>${LOG}
 status_check
 
 
-print_head " Changing listen Ip address"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf  /etc/redis/redis.conf &>>${LOG}
-status_check
-
-print_head " Enable redis"
+print_head "Enable Redis"
 systemctl enable redis &>>${LOG}
 status_check
 
-print_head " Restart redis"
-systemctl start redis &>>${LOG}
+print_head "Start Redis"
+systemctl restart redis &>>${LOG}
 status_check
