@@ -1,41 +1,34 @@
 source common.sh
 
-if [ -z "${roboshop_rabbitmq_password}" ]; then
-  echo "Variable roboshop_rabbitmq_password is missing"
+if [ -z "${root_rabbitmq_password}" ]; then
+  echo "variable root_rabbitmq_password is missing"
   exit 1
 fi
 
-print_head "Configuring Erlang YUM Repos"
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash &>>${LOG}
+print_head "Configuring erlang yum repos"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>${LOG}
 status_check
 
-print_head "Configuring RabbitMQ YUM Repos"
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>${LOG}
+print_head "Configuring rabitMq yum repos"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>${LOG}
 status_check
 
-print_head "Install Erlang & RabbitMQ"
-yum install erlang rabbitmq-server -y  &>>${LOG}
+print_head "Installing erlang and rabbitmq"
+dnf install erlang rabbitmq-server -y &>>${LOG}
 status_check
 
-print_head "Enable RabbitMQ Server"
-systemctl enable rabbitmq-server  &>>${LOG}
+print_head "enabling rabbitmq"
+systemctl enable rabbitmq-server &>>${LOG}
 status_check
 
-print_head "Start RabbitMQ Server"
-systemctl start rabbitmq-server  &>>${LOG}
+print_head "starting rabbitmq server"
+systemctl start rabbitmq-server &>>${LOG}
 status_check
 
-print_head "Add Application User"
-rabbitmqctl list_users | grep roboshop &>>${LOG}
-if [ $? -ne 0 ]; then
-  rabbitmqctl add_user roboshop ${roboshop_rabbitmq_password}  &>>${LOG}
-fi
+print_head "adding user "
+rabbitmqctl add_user roboshop ${root_rabbitmq_password} &>>${LOG}
 status_check
 
-print_head "Add Tags to Application User"
-rabbitmqctl set_user_tags roboshop administrator  &>>${LOG}
-status_check
-
-print_head "Add permission to Application User"
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"  &>>${LOG}
+print_head "setting up permissions"
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>${LOG}
 status_check
