@@ -25,8 +25,11 @@ print_head "starting rabbitmq server"
 systemctl start rabbitmq-server &>>${LOG}
 status_check
 
-print_head "adding user "
+print_head "adding user"
+sudo rabbitmqctl list_user grep | roboshop
+if [ $? -ne 0 ];then
 rabbitmqctl add_user roboshop ${root_rabbitmq_password} &>>${LOG}
+fi
 status_check
 
 print_head "setting up permissions"
