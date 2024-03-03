@@ -161,9 +161,9 @@ GOLANG() {
 
   APP_PREREQ
 
-  print_head"Downloading dependancies"
+  print_head "Downloading dependancies"
   cd /app
-  print_headc" init dispatch"
+  print_head "init dispatch"
   go mod init dispatch
   status_check
   print_head " get and build"
