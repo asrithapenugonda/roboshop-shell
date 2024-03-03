@@ -153,3 +153,28 @@ PYTHON() {
   SYSTEMD_SETUP
 
 }
+
+GOLANG() {
+  print_head "Install golang"
+  dnf install golang -y &>>{LOG}
+  status_check
+
+  APP_PREREQ
+
+  print_head"Downloading dependancies"
+  cd /app
+  print_headc" init dispatch"
+  go mod init dispatch
+  status_check
+  print_head " get and build"
+  go get
+  status_check
+  go build
+  status_check
+
+  print_head "Update Passwords in Service File"
+    sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${script_location}/Files/${component}.service  &>>${LOG}
+    status_check
+
+    SYSTEMD_SETUP
+}
