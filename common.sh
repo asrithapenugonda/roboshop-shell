@@ -163,6 +163,8 @@ GOLANG() {
 
   print_head "Downloading dependancies"
   cd /app
+  status_check
+
   print_head "init dispatch"
   go mod init dispatch
   status_check
