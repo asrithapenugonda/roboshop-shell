@@ -1,8 +1,9 @@
 script_location=$(pwd)
 
-echo -e "/e[32m installing nginx [0m \e"
+echo -e "/e[32m installing nginx \e[0m"
 dnf install nginx -y
 
+echo -e "/[32m enabling nginx \e[0m"
 systemctl enable nginx
 systemctl start nginx
 
