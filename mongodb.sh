@@ -1,6 +1,6 @@
 script_location=$(pwd)
 
-cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo
+cp ${script_location}/Files/mongod.repo /etc/yum.repos.d/mongodb.repo
 
 dnf install mongodb-org -y
 
