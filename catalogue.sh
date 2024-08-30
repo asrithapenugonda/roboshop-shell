@@ -16,7 +16,7 @@ npm install
 cp ${script_location}/Files/catalogue.service /etc/systemd/system/catalogue.service
 
 
-cp ${script_location}/File/mongod.repo /etc/yum.repos.d/mongodb.repo
+cp ${script_location}/Files/mongod.repo /etc/yum.repos.d/mongodb.repo
 
 dnf install mongodb-org -y
 mongo --host mongodb-dev.robomart.tech </app/schema/catalogue.js
