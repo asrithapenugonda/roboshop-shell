@@ -20,3 +20,5 @@ cp ${script_location}/Files/mongod.repo /etc/yum.repos.d/mongodb.repo
 
 dnf install mongodb-org -y
 mongo --host mongodb-dev.robomart.tech </app/schema/catalogue.js
+
+systemctl restart catalogue
