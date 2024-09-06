@@ -12,7 +12,7 @@ status_check () {
   fi
 }
 
-echo -e "\e[41m installing nginx \e[0m"
+echo -e "\e[40m installing nginx \e[0m"
 dnf install nginx -y &>>${Log}
 status_check
 
@@ -20,30 +20,30 @@ echo -e "\e[41m enabling nginx \e[0m"
 systemctl enable nginx &>>${Log}
 status_check
 
-echo -e "\e[41m starting the nginx \e[0m"
+echo -e "\e[42m starting the nginx \e[0m"
 systemctl start nginx &>>${Log}
 status_check
 
-echo -e "\e[41m removing the default content \e[0m"
+echo -e "\e[43m removing the default content \e[0m"
 rm -rf /usr/share/nginx/html/* &>>${Log}
 status_check
 
-echo -e "\e[41m downloading our frontend zip file \e[0m"
+echo -e "\e[44m downloading our frontend zip file \e[0m"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${Log}
 status_check
 
-echo -e "\e[41m navigating to the desired file \e[0m"
+echo -e "\e[45m navigating to the desired file \e[0m"
 cd /usr/share/nginx/html &>>${Log}
 status_check
 
-echo -e "\e[41m unzipping the frontend content\e[0m"
+echo -e "\e[46m unzipping the frontend content\e[0m"
 unzip /tmp/frontend.zip &>>${Log}
 status_check
 
-echo -e "\e[41m creating roboshop configuration \e[0m"
+echo -e "\e[47m creating roboshop configuration \e[0m"
 cp ${script_location}/Files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${Log}
 status_check
 
-echo -e "\e[41m restarting the nginx\e[0m"
+echo -e "\e[39m restarting the nginx\e[0m"
 systemctl restart nginx &>>${Log}
 status_check
