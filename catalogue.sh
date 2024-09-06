@@ -1,33 +1,61 @@
-script_location=$(pwd)
-LOG=/tmp/roboshop.log
+source common.sh
 
-status_check (){
-  if [ $? -eq 0 ]
-  then
-    echo -e "\e[32mSuccess\e[0m"
-  else
-    echo -e "\e[31mFailure\e[0m"
-    echo -e "Refer Log failure "
-}
+print_head "Disable the present NOdejs"
+dnf module disable nodejs -y &>>${LOG}
+status_check
 
-dnf module disable nodejs -y
-dnf module enable nodejs:18 -y
+print_head "enable the Nodejs:18"
+dnf module enable nodejs:18 -y &>>${LOG}
+status_check
 
-dnf install nodejs -y
+print_head "Installing NOdejs"
+dnf install nodejs -y &>>${LOG}
+status_check
 
-useradd roboshop
-mkdir /app
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
-cd /app
-unzip /tmp/catalogue.zip
-cd /app
-npm install
-cp ${script_location}/Files/catalogue.service /etc/systemd/system/catalogue.service
+print_head "Adding the user roboshop"
+useradd roboshop &>>${LOG}
+status_check
 
+print_head "Creating a directory called app"
+mkdir /app &>>${LOG}
+status_check
 
-cp ${script_location}/Files/mongod.repo /etc/yum.repos.d/mongodb.repo
+print_head "Downlaoding the zip File"
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
+status_check
 
-dnf install mongodb-org -y
-mongo --host mongodb-dev.robomart.tech </app/schema/catalogue.js
+print_head "Changing the directory to the app"
+cd /app &>>${LOG}
+status_check
 
-systemctl restart catalogue
+print_head "Unzipping the Zip file"
+unzip /tmp/catalogue.zip &>>${LOG}
+status_check
+
+print_head "Changing to app directory"
+cd /app &>>${LOG}
+status_check
+
+print_head "Npm install"
+npm install &>>${LOG}
+status_check
+
+print_head "Setting Systemd of catalogue"
+cp ${script_location}/Files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
+status_check
+
+print_head "Downlaoding mongodb repository"
+cp ${script_location}/Files/mongod.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
+status_check
+
+print_head "Installing Mongodb"
+dnf install mongodb-org -y &>>${LOG}
+status_check
+
+print_head "Loading schema"
+mongo --host mongodb-dev.robomart.tech </app/schema/catalogue.js &>>${LOG}
+status_check
+
+print_head "Restarting the catalogue"
+systemctl restart catalogue &>>${LOG}
+status_check

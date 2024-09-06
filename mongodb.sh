@@ -1,14 +1,27 @@
-script_location=$(pwd)
+source common.sh
 
-cp ${script_location}/Files/mongod.repo /etc/yum.repos.d/mongodb.repo
+print_head " Downloading mongodb Repo"
+cp ${script_location}/Files/mongod.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
+status_check
 
-dnf install mongodb-org -y
+print_head " Installing Mongodb"
+dnf install mongodb-org -y &>>${LOG}
+status_check
 
-systemctl enable mongod
-systemctl start mongod
+print_head " Enabling mongodb"
+systemctl enable mongod &>>${LOG}
+status_check
 
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+print_head " Starting the Mongodb"
+systemctl start mongod &>>${LOG}
+status_check
 
-systemctl restart mongod
+print_head " Substituing listen address"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${LOG}
+status_check
+
+print_head "Restarting the mongodb"
+systemctl restart mongod &>>${LOG}
+status_check
 
 

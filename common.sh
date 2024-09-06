@@ -1,5 +1,5 @@
 script_location=$(pwd)
-Log=/tmp/roboshop.log
+LOG=/tmp/roboshop.log
 
 status_check () {
   if [ $? -eq 0 ]
