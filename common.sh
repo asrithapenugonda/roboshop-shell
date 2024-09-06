@@ -66,7 +66,7 @@ LOAD_SCHEMA () {
 SYSTEMD_SETUP () {
 
   print_head "Setting Systemd of ${component}"
-  cp ${script_location}/Files/${component}.service /etc/systemd/system/{$component}.service &>>${LOG}
+  cp ${script_location}/Files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
   print_head "Reload SystemD"
