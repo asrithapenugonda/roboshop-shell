@@ -24,7 +24,7 @@ APP_PREREQ () {
   fi
 
   print_head "Downlaoding the zip File"
-  curl -o /tmp/$(component).zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
+  curl -L -o /tmp/$(component).zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
   status_check
 
   print_head "Changing the directory to the app"
