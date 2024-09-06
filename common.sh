@@ -105,7 +105,6 @@ NODEJS() {
 
   SYSTEMD_SETUP
 
-  LOAD_SCHEMA
 }
 
 
