@@ -39,7 +39,7 @@ APP_PREREQ () {
 
 LOAD_SCHEMA () {
 
-  if [ ${schema_load} == "TRUE"]; then
+  if [ ${schema_load} == "TRUE" ]; then
 
     if [ ${schema_type} == "mongo"  ]; then
             print_head "Configuring Mongo Repo "
