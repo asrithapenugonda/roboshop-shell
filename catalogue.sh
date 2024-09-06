@@ -13,11 +13,11 @@ dnf install nodejs -y &>>${LOG}
 status_check
 
 print_head "Adding the user roboshop"
-#id roboshop &>>${LOG}
-#if [ &? -ne 0 ]
-#then
+id roboshop &>>${LOG}
+if [ $? -ne 0 ]
+then
   useradd roboshop &>>${LOG}
-#fi
+fi
 status_check
 
 print_head "Creating a directory called app"
