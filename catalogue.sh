@@ -16,12 +16,15 @@ print_head "Adding the application user"
 id roboshop &>>${LOG}
 if [ $? -ne 0 ]; then
     useradd roboshop &>>${LOG}
+    status_check
 fi
-status_check
 
-mkdir /app &>>${LOG}
-status_check
 
+#if [ ! -d "/app" ]; then
+  print_head "Creating /app directory"
+  mkdir /app &>>${LOG}
+  status_check
+#fi
 print_head "Downlaoding the zip File"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
 status_check
