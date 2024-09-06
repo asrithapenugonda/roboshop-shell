@@ -13,7 +13,7 @@ dnf install redis -y  &>>{LOG}
 status_check
 
 print_head "Changing the Listen address"
-sed -i -e 's/127.0.0.0/0.0.0.0/' /etc/redis.conf etc/redis/redis.conf  &>>{LOG}
+sed -i -e 's/127.0.0.0/0.0.0.0/' /etc/redis.conf   &>>{LOG}
 status_check
 
 print_head "Enable Redis"
