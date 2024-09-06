@@ -20,11 +20,12 @@ if [ $? -ne 0 ]; then
 fi
 
 
-#if [ ! -d "/app" ]; then
+if [ ! -d "/app" ]; then
   print_head "Creating /app directory"
   mkdir /app &>>${LOG}
   status_check
-#fi
+fi
+
 print_head "Downlaoding the zip File"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
 status_check
