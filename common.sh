@@ -83,12 +83,17 @@ SYSTEMD_SETUP () {
 }
 
 NODEJS() {
-  print_head "Configuring NodeJS Repos"
-  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
+
+  print_head "Disable NODEJS"
+  dnf module disable nodejs -y &>>${LOG}
   status_check
 
-  print_head "Install NodeJS"
-  yum install nodejs -y &>>${LOG}
+  print_head "Enable NODEJS 18 version"
+  dnf module enable nodejs:18 -y &>>${LOG}
+  status_check
+
+  print_head "Install NODEJS"
+  dnf install nodejs -y &>>${LOG}
   status_check
 
   APP_PREREQ
