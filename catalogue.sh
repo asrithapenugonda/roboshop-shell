@@ -1,5 +1,14 @@
 script_location=$(pwd)
+LOG=/tmp/roboshop.log
 
+status_check (){
+  if [ $? -eq 0 ]
+  then
+    echo -e "\e[32mSuccess\e[0m"
+  else
+    echo -e "\e[31mFailure\e[0m"
+    echo -e "Refer Log failure "
+}
 
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
