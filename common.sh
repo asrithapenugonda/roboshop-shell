@@ -82,31 +82,25 @@ SYSTEMD_SETUP () {
   status_check
 }
 
-NODEJS () {
-  print_head "Disable the present NOdejs"
-  dnf module disable nodejs -y &>>${LOG}
+NODEJS() {
+  print_head "Configuring NodeJS Repos"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
   status_check
 
-  print_head "enable the Nodejs:18"
-  dnf module enable nodejs:18 -y &>>${LOG}
-  status_check
-
-  print_head "Installing NOdejs"
-  dnf install nodejs -y &>>${LOG}
+  print_head "Install NodeJS"
+  yum install nodejs -y &>>${LOG}
   status_check
 
   APP_PREREQ
 
-  print_head "Changing to app directory"
+  print_head "Installing NodeJS Dependencies"
   cd /app &>>${LOG}
-  status_check
-
-  print_head "Npm install"
   npm install &>>${LOG}
   status_check
 
   SYSTEMD_SETUP
 
   LOAD_SCHEMA
-
 }
+
+
