@@ -35,7 +35,7 @@ cd /app &>>${LOG}
 status_check
 
 print_head "Unzipping the Zip file"
-unzip /tmp/catalogue.zip &>>${LOG}
+unzip -o /tmp/catalogue.zip &>>${LOG}
 status_check
 
 print_head "Changing to app directory"
