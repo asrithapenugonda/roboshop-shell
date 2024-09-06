@@ -15,24 +15,28 @@ status_check () {
 print_head () {
   echo -e "\e[40m $1 \e[0m"
 }
-APP_PREREQ () {
+APP_PREREQ() {
 
-  if [ ! -d "/app" ]; then
-    print_head "Creating /app directory"
-    mkdir /app &>>${LOG}
-    status_check
+  print_head "Add Application User"
+  id roboshop &>>${LOG}
+  if [ $? -ne 0 ]; then
+    useradd roboshop &>>${LOG}
   fi
-
-  print_head "Downlaoding the zip File"
-  curl -L -o /tmp/$(component).zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
   status_check
 
-  print_head "Changing the directory to the app"
-  cd /app &>>${LOG}
+  mkdir -p /app &>>${LOG}
+
+  print_head "Downloading App content"
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
   status_check
 
-  print_head "Unzipping the Zip file"
-  unzip -o /tmp/${component}.zip &>>${LOG}
+  print_head "Cleanup Old Content"
+  rm -rf /app/* &>>${LOG}
+  status_check
+
+  print_head "Extracting App Content"
+  cd /app
+  unzip /tmp/${component}.zip &>>${LOG}
   status_check
 
 }
