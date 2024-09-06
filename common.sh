@@ -15,6 +15,7 @@ status_check () {
 print_head () {
   echo -e "\e[40m $1 \e[0m"
 }
+
 APP_PREREQ() {
 
   print_head "Add Application User"
