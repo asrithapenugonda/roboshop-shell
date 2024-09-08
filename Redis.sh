@@ -13,7 +13,7 @@ dnf install redis -y  &>>{LOG}
 status_check
 
 print_head "Changing the Listen address"
-sudo sed -i 's/# bind 127.0.0.1/bind 0.0.0.0/' /etc/redis/redis.conf
+sudo sed -i 's/# bind 127.0.0.1/bind 0.0.0.0/'  /etc/redis.conf /etc/redis/redis.conf
 
 status_check
 
