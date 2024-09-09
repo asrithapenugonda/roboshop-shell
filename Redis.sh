@@ -1,6 +1,6 @@
 source common.sh
 
-print_head "Setiing Up Redis Repo"
+print_head "Setting Up Redis Repo"
 dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>{LOG}
 status_check
 

@@ -1,18 +1,17 @@
 script_location=$(pwd)
 LOG=/tmp/roboshop.log
 
-status_check () {
-  if [ $? -eq 0 ]
-  then
+status_check() {
+  if [ $? -eq 0 ]; then
     echo -e "\e[1;32mSUCCESS\e[0m"
   else
     echo -e "\e[1;31mFAILURE\e[0m"
-    echo "Refer to the file ${LOG}"
-    exit
+    echo "Refer Log file for more information, LOG - ${LOG}"
+    exit 1
   fi
 }
 
-print_head () {
+print_head() {
   echo -e "\e[40m $1 \e[0m"
 }
 
@@ -42,30 +41,8 @@ APP_PREREQ() {
 
 }
 
-LOAD_SCHEMA () {
-
-  if [ ${schema_load} == "true" ]; then
-
-    if [ ${schema_type} == "mongo"  ]; then
-            print_head "Configuring Mongo Repo "
-            cp ${script_location}/Files/mongod.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
-            status_check
-
-            print_head "Install Mongo Client"
-            yum install mongodb-org-shell -y &>>${LOG}
-            status_check
-
-            print_head "Load Schema"
-            mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js &>>${LOG}
-            status_check
-          fi
-  fi
-}
-
-
-SYSTEMD_SETUP () {
-
-  print_head "Setting Systemd of ${component}"
+SYSTEMD_SETUP() {
+  print_head "Configuring ${component} Service File"
   cp ${script_location}/Files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
@@ -81,18 +58,38 @@ SYSTEMD_SETUP () {
   systemctl start ${component} &>>${LOG}
   status_check
 }
+LOAD_SCHEMA() {
+  if [ ${schema_load} == "true" ]; then
+
+    if [ ${schema_type} == "mongo"  ]; then
+      print_head "Configuring Mongo Repo "
+      cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
+      status_check
+
+      print_head "Install Mongo Client"
+      yum install mongodb-org-shell -y &>>${LOG}
+      status_check
+
+      print_head "Load Schema"
+      mongo --host mongodb-dev.devopsb70.online </app/schema/${component}.js &>>${LOG}
+      status_check
+    fi
+
+  fi
+
+}
 
 NODEJS() {
 
-  print_head "Disable NODEJS"
-  dnf module disable nodejs -y &>>${LOG}
+  print_head "Disable the current Nodejs"
+  dnf module disable nodejs -y  &>>${LOG}
   status_check
 
-  print_head "Enable NODEJS 18 version"
+  print_head "Enable the  Nodejs:18"
   dnf module enable nodejs:18 -y &>>${LOG}
   status_check
 
-  print_head "Install NODEJS"
+  print_head "Installing Nodejs"
   dnf install nodejs -y &>>${LOG}
   status_check
 
@@ -105,6 +102,7 @@ NODEJS() {
 
   SYSTEMD_SETUP
 
+  LOAD_SCHEMA
 }
 
 
