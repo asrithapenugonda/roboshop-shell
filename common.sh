@@ -75,6 +75,18 @@ LOAD_SCHEMA() {
       status_check
     fi
 
+    if [ ${schema_type} == "mysql"  ]; then
+
+          print_head "Install MySQL Client"
+          yum install mysql -y &>>${LOG}
+          status_check
+
+          print_head "Load Schema"
+          mysql -h mysql-dev.devopsb70.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
+          status_check
+    fi
+
+
   fi
 
 }
@@ -105,4 +117,25 @@ NODEJS() {
   LOAD_SCHEMA
 }
 
+MAVEN() {
+
+  print_head "Installing Maven"
+  dnf install maven -y &>>${LOG}
+  status_check
+
+  APP_PREREQ
+
+  print_head "Installing Maven Packages" &>>${LOG}
+  cd /app
+  status_check
+  mvn clean package &>>${LOG}
+  status_check
+
+  print_head "Copy file to app location"
+  mv target/{component}-1.0.jar {component}.jar &>>${LOG}
+
+  SYSTEMD_SETUP
+
+  LOAD_SCHEMA
+}
 
