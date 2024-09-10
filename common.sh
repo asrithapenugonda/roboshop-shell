@@ -125,9 +125,7 @@ MAVEN() {
 
   APP_PREREQ
 
-  print_head "Installing Maven Packages" &>>${LOG}
-  cd /app
-  status_check
+
   mvn clean package &>>${LOG}
   status_check
 
