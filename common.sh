@@ -117,23 +117,26 @@ NODEJS() {
   LOAD_SCHEMA
 }
 
+
 MAVEN() {
 
-  print_head "Installing Maven"
-  dnf install maven -y &>>${LOG}
+  print_head "Install Maven"
+  yum install maven -y &>>${LOG}
   status_check
 
   APP_PREREQ
 
-
-  mvn clean package &>>${LOG}
+  print_head "Build a package"
+  mvn clean package  &>>${LOG}
   status_check
 
-  print_head "Copy file to app location"
-  mv target/{component}-1.0.jar {component}.jar &>>${LOG}
+  print_head "Copy App file to App Location"
+  mv target/${component}-1.0.jar ${component}.jar
+  status_check
 
   SYSTEMD_SETUP
 
   LOAD_SCHEMA
+
 }
 
