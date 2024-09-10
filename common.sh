@@ -140,3 +140,24 @@ MAVEN() {
 
 }
 
+PYTHON() {
+
+  print_head "Installing Python"
+  dnf install python36 gcc python3-devel -y &>>${LOG}
+  status_check
+
+  APP_PREREQ
+
+  print_head " Downloading Dependencies"
+  cd /app
+  pip3.6 install -r requirements.txt &>>${LOG}
+  status_check
+
+  print_head " Password Updation to service file"
+  sed -i -e 's/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}' ${script_location}/Files/{component}.service
+  status_check
+
+  SYSTEMD_SETUP
+
+}
+
