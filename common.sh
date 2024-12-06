@@ -71,7 +71,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Load Schema"
-      mongo --host mongodb-dev.robomart.tech </app/schema/${component}.js &>>${LOG}
+      mongo --host mongodb-dev.robomart.website </app/schema/${component}.js &>>${LOG}
       status_check
     fi
 
@@ -82,7 +82,7 @@ LOAD_SCHEMA() {
           status_check
 
           print_head "Load Schema"
-          mysql -h mysql-dev.robomart.tech -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
+          mysql -h mysql-dev.robomart.website -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
           status_check
     fi
 
