@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##### Change these values ###
-ZONE_ID="Z085863124NRT9FCDJPKP"
+ZONE_ID="Z0354464NK7PD7M7BFQ0"
 DOMAIN="robomart.website"
 SG_NAME="allow_all"
 env=dev
