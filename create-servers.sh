@@ -3,7 +3,7 @@
 ##### Change these values ###
 ZONE_ID="Z0354464NK7PD7M7BFQ0"
 DOMAIN="robomart.website"
-SG_NAME="allow_all"
+SG_NAME="allow-all"
 env=dev
 #############################
 
