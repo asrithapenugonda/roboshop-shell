@@ -11,4 +11,5 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 
 cp files/nginx-roboshop.conf /etc/nginx/default.d/robohsop.conf
-systemctl restart nginx
+system restart nginx
+#frontend script
