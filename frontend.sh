@@ -1,4 +1,5 @@
-sudo dnf install nginx
+sudo dnf install nginx -y
+sudo dnf install zip -y
 
 systemctl enable nginx
 systemctl start nginx
