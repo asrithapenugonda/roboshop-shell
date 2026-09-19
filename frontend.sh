@@ -11,6 +11,6 @@ curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.z
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 
-cp files/nginx-roboshop.conf /etc/nginx/default.d/robohsop.conf
+cp files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
 system restart nginx
 #frontend script
