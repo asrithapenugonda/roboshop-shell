@@ -7,7 +7,7 @@ dnf module disable redis -y &>>${LOG}
 status_check
 
 print_head "Enable redis version 6"
-dnf module enable redis:6 -y &>>${LOG}
+dnf module enable redis:6.2 -y &>>${LOG}
 status_check
 
 print_head "Installing mongodb"
