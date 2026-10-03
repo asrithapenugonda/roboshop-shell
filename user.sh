@@ -2,7 +2,7 @@ source common.sh
 
 install_requirements
 
-component=catalogue
+component=user
 
 schema_load=true
 
