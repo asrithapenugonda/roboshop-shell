@@ -25,6 +25,7 @@ print_head() {
 }
 
 nodejs() {
+
   print_head "Disable existing Node.js module"
   dnf module disable nodejs -y &>>${LOG}
   status_check
@@ -76,7 +77,7 @@ nodejs() {
   systemctl start catalogue &>>${LOG}
   status_check
 
-  if [ ${schema_load == true ] ; then
+  if [ ${schema_load} == true ] ; then
 
   print_head "Copy MongoDB repository file"
   cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${LOG}
