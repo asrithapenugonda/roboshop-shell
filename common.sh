@@ -59,7 +59,7 @@ nodejs() {
   status_check
 
   print_head "Extract application artifact"
-  unzip /tmp/{component}.zip &>>${LOG}
+  unzip /tmp/${component}.zip &>>${LOG}
   status_check
 
   print_head "Install Node.js dependencies"
@@ -68,7 +68,7 @@ nodejs() {
   status_check
 
   print_head "Copy catalogue systemd service"
-  cp ${script_location}/files/catalogue.service /etc/systemd/system/{component}.service &>>${LOG}
+  cp ${script_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
   print_head "Daemon reload and start catalogue service"
