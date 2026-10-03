@@ -67,14 +67,14 @@ nodejs() {
   npm install &>>${LOG}
   status_check
 
-  print_head "Copy catalogue systemd service"
+  print_head "Copy ${component} systemd service"
   cp ${script_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
   status_check
 
-  print_head "Daemon reload and start catalogue service"
+  print_head "Daemon reload and start ${component}service"
   systemctl daemon-reload &>>${LOG}
-  systemctl enable catalogue &>>${LOG}
-  systemctl start catalogue &>>${LOG}
+  systemctl enable ${component} &>>${LOG}
+  systemctl start ${component} &>>${LOG}
   status_check
 
   if [ ${schema_load} == true ] ; then
