@@ -59,7 +59,7 @@ nodejs() {
   status_check
 
   print_head "Extract application artifact"
-  unzip /tmp/catalogue.zip &>>${LOG}
+  unzip /tmp/{component}.zip &>>${LOG}
   status_check
 
   print_head "Install Node.js dependencies"
