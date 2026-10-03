@@ -1,25 +1,40 @@
-script_location=$(pwd)
-LOG=/tmp/roboshop.log
+source common.sh
 
-echo -e "\e[33mInstalling NGinx\e[0m"
+install_requriments
+
+print_head "Installing NGinx"
 sudo dnf install nginx -y &>>${LOG}
-echo -e "\e[33mInstalling zip\e[0m"
-sudo dnf install zip -y  &>>${LOG}
-echo -e "\e[33mEnable NGinx\e[0m"
-systemctl enable nginx  &>>${LOG}
-echo -e "\e[33mStart NGinx\e[0m"
-systemctl start nginx  &>>${LOG}
+status_check
 
-echo -e "\e[33mDeleting content in nginx file\e[0m"
+print_head "Enable NGinx"
+systemctl enable nginx  &>>${LOG}
+status_check
+
+print_head "start nginx"
+systemctl start nginx  &>>${LOG}
+status_check
+
+print_head "Deleting content in nginx file"
 rm -rf /usr/share/nginx/html/* &>>${LOG}
-echo -e "\e[33mDownloading frontend zip file\e[0m"
+status_check
+
+print_head "Downloading frontend zip file"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${LOG}
-echo -e "\e[33mchanging path to /usr/share/nginx/html\e[0m"
+status_check
+
+print_head "changing path to /usr/share/nginx/html"
 cd /usr/share/nginx/html &>>${LOG}
-echo -e "\e[33mExtract the frontend file\e[0m"
+status_check
+
+print_head "Extract the frontend file"
 unzip /tmp/frontend.zip &>>${LOG}
-echo -e "\e[33m updating robohsop config file\e[0m"
+status_check
+
+print_head "updating robohsop config file"
 cp ${script_location}/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
-echo -e "\e[33mrestarting NGinx\e[0m"
+status_check
+
+print_head "restarting NGinx"
 systemctl restart nginx &>>${LOG}
+status_check
 #frontend script
