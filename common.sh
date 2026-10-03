@@ -12,7 +12,7 @@ status_check() {
   fi
 }
 
-install_requriments() {
+install_requirements() {
 
   echo -e "\e[33mInstalling zip\e[0m"
   sudo dnf install zip -y  &>>${LOG}

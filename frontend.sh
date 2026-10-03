@@ -1,6 +1,6 @@
 source common.sh
 
-install_requriments
+install_requirements
 
 print_head "Installing NGinx"
 sudo dnf install nginx -y &>>${LOG}
