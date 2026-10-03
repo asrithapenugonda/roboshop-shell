@@ -2,7 +2,7 @@ source common.sh
 
 
 print_head "Copying mongodb repo file "
-cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongod.repo &>>$(LOG)
+cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>$(LOG)
 status_check
 
 print_head "Installing mongodb"
