@@ -76,7 +76,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Load Schema"
-      mongo --host mongodb-dev.devopsb70.online </app/schema/${component}.js &>>${LOG}
+      mongo --host mongodb-dev.robospace.online </app/schema/${component}.js &>>${LOG}
       status_check
     fi
 
@@ -87,7 +87,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Load Schema"
-      mysql -h mysql-dev.devopsb70.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
+      mysql -h mysql-dev.robospace.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
       status_check
     fi
 
