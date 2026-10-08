@@ -72,7 +72,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Install Mongo Client"
-      yum install mongodb-org-shell -y &>>${LOG}
+      yum install mongodb-org -y &>>${LOG}
       status_check
 
       print_head "Load Schema"
