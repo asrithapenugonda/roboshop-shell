@@ -10,7 +10,7 @@ status_check
 #dnf module enable redis:6.2 -y &>>${LOG}
 #status_check
 
-print_head "Installing mongodb"
+print_head "Installing redis"
 dnf install redis -y  &>>${LOG}
 status_check
 
@@ -18,10 +18,10 @@ print_head "Changing listen address to 0.0.0.0"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf &>>${LOG}
 status_check
 
-print_head "Enable mongodb"
+print_head "Enable redis"
 systemctl enable redis &>>${LOG}
 status_check
 
-print_head "restart mongodb"
+print_head "restart redis"
 systemctl restart redis &>>${LOG}
 status_check
