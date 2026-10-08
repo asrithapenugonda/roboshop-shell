@@ -76,7 +76,7 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Load Schema"
-      mongo --host mongodb-dev.robospace.online </app/schema/${component}.js &>>${LOG}
+      mongosh --host mongodb-dev.robospace.online </app/schema/${component}.js &>>${LOG}
       status_check
     fi
 
