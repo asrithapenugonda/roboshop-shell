@@ -29,8 +29,8 @@ status_check
 print_head "Reset Default Database Password"
 #mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
 
-temporary_password=$(grep 'temporary password' /var/log/mysqld.log | tail -1 | awk '{print $NF}')
-mysql -uroot -p"${temporary_password}" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${root_mysql_password}';" &>>${LOG}
+print_head "Reset Default Database Password"
+mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
 status_check
 
 if [ $? -eq 1 ]; then
