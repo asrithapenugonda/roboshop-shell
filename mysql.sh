@@ -6,16 +6,16 @@ if [ -z "${root_mysql_password}" ]; then
 fi
 
 
-#print_head "Disable MySQL Default Module"
-#dnf module disable mysql -y &>>${LOG}
-#status_check
+print_head "Disable MySQL Default Module"
+dnf module disable mysql -y &>>${LOG}
+status_check
 
-#print_head "Copy MySQL Repo file"
-#cp ${script_location}/files/mysql.repo /etc/yum.repos.d/mysql.repo &>>${LOG}
-#status_check
+print_head "Copy MySQL Repo file"
+cp ${script_location}/files/mysql.repo /etc/yum.repos.d/mysql.repo &>>${LOG}
+status_check
 
 print_head "Install MySQL Server"
-dnf install mysql-server -y  &>>${LOG}
+dnf install mysql-community-server -y &>>${LOG}
 status_check
 
 print_head "Enable MySQL"
