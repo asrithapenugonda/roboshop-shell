@@ -27,5 +27,8 @@ systemctl restart mysqld &>>${LOG}
 status_check
 
 print_head "Reset Default Database Password"
-mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
+#mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
+
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${root_mysql_password}'; FLUSH PRIVILEGES;" &>>${LOG}
+
 status_check
