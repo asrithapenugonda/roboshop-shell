@@ -87,8 +87,17 @@ LOAD_SCHEMA() {
       status_check
 
       print_head "Fix legacy MySQL GRANT syntax"
-      sed -i "s/GRANT ALL ON cities\.\* TO 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';/CREATE USER IF NOT EXISTS 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';\\nGRANT ALL PRIVILEGES ON cities.* TO 'shipping'@'%';/" /app/schema/shipping.sql
-      status_check
+
+      if grep -q "IDENTIFIED BY 'RoboShop@1'" /app/schema/shipping.sql; then
+        sed -i "s/GRANT ALL ON cities\.\* TO 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';/CREATE USER IF NOT EXISTS 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';/" /app/schema/shipping.sql
+        status_check
+      fi
+
+      if ! grep -q "GRANT ALL PRIVILEGES ON cities\.\* TO 'shipping'@'%';" /app/schema/shipping.sql; then
+        echo "Expected MySQL GRANT statement not found"
+        exit 1
+      fi
+
 
       print_head "Load Schema"
       mysql -h mysql-dev.robospace.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
@@ -130,10 +139,20 @@ maven() {
 
     app_prereq
 
-    print_head "Fix MySQL JDBC authentication URL"
-    sed -i 's/useSSL=false&autoReconnect=true/useSSL=false&autoReconnect=true&allowPublicKeyRetrieval=true/' \
-      /app/src/main/java/com/instana/robotshop/shipping/JpaConfig.java
-    status_check
+
+    if [ "${component}" = "shipping" ]; then
+      print_head "Fix MySQL JDBC authentication URL"
+
+      sed -i '/String JDBC_URL =/c\        String JDBC_URL = String.format("jdbc:mysql://%s/cities?useSSL=false\&autoReconnect=true\&allowPublicKeyRetrieval=true", System.getenv("DB_HOST") == null ? "mysql" : System.getenv("DB_HOST"));' \
+        /app/src/main/java/com/instana/robotshop/shipping/JpaConfig.java
+
+      status_check
+
+      grep -Fq 'allowPublicKeyRetrieval=true' /app/src/main/java/com/instana/robotshop/shipping/JpaConfig.java
+      status_check
+    fi
+
+
 
 
     print_head "Build a package"
