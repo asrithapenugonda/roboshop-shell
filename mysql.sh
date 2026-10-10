@@ -29,6 +29,6 @@ status_check
 print_head "Reset Default Database Password"
 #mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
 
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${root_mysql_password}'; FLUSH PRIVILEGES;" &>>${LOG}
+sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'; FLUSH PRIVILEGES;"
 
 status_check
