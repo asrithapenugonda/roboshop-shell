@@ -130,6 +130,12 @@ maven() {
 
     app_prereq
 
+    print_head "Fix MySQL JDBC authentication URL"
+    sed -i 's/useSSL=false&autoReconnect=true/useSSL=false&autoReconnect=true&allowPublicKeyRetrieval=true/' \
+      /app/src/main/java/com/instana/robotshop/shipping/JpaConfig.java
+    status_check
+
+
     print_head "Build a package"
     mvn clean package  &>>${LOG}
     status_check
