@@ -90,6 +90,7 @@ LOAD_SCHEMA() {
       print_head " loading schema"
       mysql -h mysql-dev.robospace.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
       status_check
+    fi
   fi
 }
 
