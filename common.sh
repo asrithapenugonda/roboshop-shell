@@ -86,8 +86,11 @@ LOAD_SCHEMA() {
       yum install mysql -y &>>${LOG}
       status_check
 
+      print_head "Fix legacy MySQL GRANT syntax"
+      sed -i "s/GRANT ALL ON cities\.\* TO 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';/CREATE USER IF NOT EXISTS 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';\\nGRANT ALL PRIVILEGES ON cities.* TO 'shipping'@'%';/" /app/schema/shipping.sql
+      status_check
+
       print_head "Load Schema"
-      print_head " loading schema"
       mysql -h mysql-dev.robospace.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
       status_check
     fi
