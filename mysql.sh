@@ -32,11 +32,9 @@ print_head "Reset Default Database Password"
 #sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'; FLUSH PRIVILEGES;"
 
 print_head "Check if MySQL root password is already set"
-mysql -u$root_mysql_password -e "SELECT 1;" &>>${LOG}
+mysql -e "SELECT 1;" &>>${LOG}
 if [ $? -ne 0 ]; then
   print_head "Setting MySQL Root Password"
-  # On fresh install, MySQL 8.0 sometimes uses auth_socket or creates a temporary password.
-  # We can alter the root user password directly.
   mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${root_mysql_password}'; FLUSH PRIVILEGES;" &>>${LOG}
   status_check
 else
