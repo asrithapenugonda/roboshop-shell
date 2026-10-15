@@ -52,4 +52,21 @@ else
     exit 1
   fi
 fi
+
+
+#status_check
+
+print_head "Configure Remote MySQL Access"
+
+mysql -u root -p"${root_mysql_password}" -e "
+CREATE USER IF NOT EXISTS 'root'@'%'
+IDENTIFIED BY '${root_mysql_password}'; &>>${LOG}
+
+GRANT ALL PRIVILEGES ON *.*
+TO 'root'@'%'
+WITH GRANT OPTION;
+" &>>${LOG}
+
+status_check
+
 #status_check
