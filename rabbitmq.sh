@@ -1,6 +1,6 @@
 source common.sh
 
-if [ -z "${roboshop_rabbimq_password}" ]; then
+if [ -z "${roboshop_rabbitmq_password}" ]; then
   echo "Variable roboshop_rabbimq_password is missing"
   exit 1
 fi
