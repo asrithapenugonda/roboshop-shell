@@ -47,15 +47,9 @@ else
     status_check
   else
     # 3. If both fail, the state is corrupted/locked out. Clean and re-initialize.
-    print_head "Resetting MySQL data directory due to existing mismatch..."
-    systemctl stop mysqld &>>${LOG}
-    rm -rf /var/lib/mysql/* &>>${LOG}
-    systemctl start mysqld &>>${LOG}
-    sleep 3
-
-    print_head "Setting MySQL Root Password on fresh re-initialization"
-    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${root_mysql_password}'; FLUSH PRIVILEGES;" &>>${LOG}
-    status_check
+    echo "ERROR: MySQL root login failed."
+    echo "Check the root password manually. MySQL data was not deleted."
+    exit 1
   fi
 fi
 #status_check
