@@ -170,24 +170,26 @@ maven() {
 
 }
 
+
 PYTHON() {
 
-  print_head "Install Python"
-  dnf install python36 gcc python3-devel -y &>>${LOG}
+  print_head "Install Python 3 and development tools"
+  dnf install python3 python3-pip gcc python3-devel -y &>>${LOG}
   status_check
 
   app_prereq
 
   print_head "Download Dependencies"
-  cd /app
-  pip3.6 install -r requirements.txt  &>>${LOG}
+  cd /app || exit 1
+  pip3 install -r requirements.txt &>>${LOG}
   status_check
 
   print_head "Update Passwords in Service File"
-  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${script_location}/files/${component}.service  &>>${LOG}
+  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" \
+    "${script_location}/files/${component}.service" &>>${LOG}
   status_check
 
   systemd
-
 }
+
 
