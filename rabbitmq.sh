@@ -5,7 +5,7 @@ if [ -z "${roboshop_rabbimq_password}" ]; then
 fi
 status_check
 
-priint_head " downlaoding Erlang packages "
+print_head " downlaoding Erlang packages "
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash  &>>${LOG}
 status_check
 
