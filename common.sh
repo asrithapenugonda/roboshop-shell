@@ -88,15 +88,17 @@ LOAD_SCHEMA() {
 
       print_head "Fix legacy MySQL GRANT syntax"
 
-      if grep -q "IDENTIFIED BY 'RoboShop@1'" /app/schema/shipping.sql; then
-        sed -i "s/GRANT ALL ON cities\.\* TO 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';/CREATE USER IF NOT EXISTS 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';/" /app/schema/shipping.sql
-        status_check
-      fi
 
-      if ! grep -q "GRANT ALL PRIVILEGES ON cities\.\* TO 'shipping'@'%';" /app/schema/shipping.sql; then
-        echo "Expected MySQL GRANT statement not found"
-        exit 1
-      fi
+      sed -i "s|GRANT ALL ON cities\.\* TO 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';|CREATE USER IF NOT EXISTS 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';\\nGRANT ALL PRIVILEGES ON cities.* TO 'shipping'@'%';|" /app/schema/shipping.sql  &>>${LOG}
+      status_check
+
+      print_head "Verify MySQL user and permissions"
+
+      grep -Fq "CREATE USER IF NOT EXISTS 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';" /app/schema/shipping.sql || { echo "CREATE USER statement missing"; exit 1; }  &>>${LOG}
+
+      grep -Fq "GRANT ALL PRIVILEGES ON cities.* TO 'shipping'@'%';" /app/schema/shipping.sql || { echo "GRANT statement missing"; exit 1; }  &>>${LOG}
+
+      status_check
 
       print_head "Load Schema"
       mysql -h mysql-dev.robospace.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql  &>>${LOG}
