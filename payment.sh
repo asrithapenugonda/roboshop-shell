@@ -1,6 +1,7 @@
 source common.sh
 
-install_requriments
+install_requirements
+
 component=payment
 schema_load=false
 
