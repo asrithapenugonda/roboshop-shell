@@ -192,4 +192,27 @@ PYTHON() {
   systemd
 }
 
+golang() {
+  print_head " Install golang"
+  dnf install golang -y  &>>${LOG}
+  status_check
 
+  app_prereq
+
+  print_head " Installing dependencies"
+  print_head " cd to /app"
+  cd /app  &>>${LOG}
+  status_check
+  print_head " create go module"
+  go mod init dispatch   &>>${LOG}
+  status_check
+
+  print_head " go get "
+  go get  &>>${LOG}
+  status_check
+
+  print_head " building packages"
+  go build  &>>${LOG}
+  status_check
+
+}
