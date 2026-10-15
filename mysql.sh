@@ -60,7 +60,7 @@ print_head "Configure Remote MySQL Access"
 
 mysql -u root -p"${root_mysql_password}" -e "
 CREATE USER IF NOT EXISTS 'root'@'%'
-IDENTIFIED BY '${root_mysql_password}'; &>>${LOG}
+IDENTIFIED BY '${root_mysql_password}';
 
 GRANT ALL PRIVILEGES ON *.*
 TO 'root'@'%'
