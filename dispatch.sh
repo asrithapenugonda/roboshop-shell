@@ -1,6 +1,8 @@
 source common.sh
 
-install_requriments
+
+
+install_requirements
 
 schema_load=false
 
