@@ -88,13 +88,13 @@ LOAD_SCHEMA() {
 
       print_head "Fix legacy MySQL GRANT syntax"
 
-      if grep -q "IDENTIFIED BY 'RoboShop@1'" /app/schema/shipping.sql; then &>>${LOG}
-        sed -i "s/GRANT ALL ON cities\.\* TO 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';/CREATE USER IF NOT EXISTS 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';\\nGRANT ALL PRIVILEGES ON cities.* TO 'shipping'@'%';/" /app/schema/shipping.sql  &>>${LOG}
+      if grep -q "IDENTIFIED BY 'RoboShop@1'" /app/schema/shipping.sql; then
+        sed -i "s|GRANT ALL ON cities\.\* TO 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';|CREATE USER IF NOT EXISTS 'shipping'@'%' IDENTIFIED BY 'RoboShop@1';\\nGRANT ALL PRIVILEGES ON cities.* TO 'shipping'@'%';|" /app/schema/shipping.sql  &>>${LOG}
         status_check
       fi
 
-      if ! grep -q "GRANT ALL PRIVILEGES ON cities\.\* TO 'shipping'@'%';" /app/schema/shipping.sql; then &>>${LOG}
-        echo "Expected MySQL GRANT statement not found"
+      if ! grep -q "GRANT ALL PRIVILEGES ON cities\.\* TO 'shipping'@'%';" /app/schema/shipping.sql; then
+        echo "Expected MySQL GRANT statement not found"  &>>${LOG}
         exit 1
       fi
 
