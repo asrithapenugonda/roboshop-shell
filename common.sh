@@ -173,7 +173,7 @@ maven() {
 PYTHON() {
 
   print_head "Install Python"
-  yum install python36 gcc python3-devel -y &>>${LOG}
+  dnf install python36 gcc python3-devel -y &>>${LOG}
   status_check
 
   app_prereq
